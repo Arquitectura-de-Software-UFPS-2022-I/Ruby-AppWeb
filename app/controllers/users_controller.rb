@@ -45,6 +45,25 @@ class UsersController < ApplicationController
          # store uploaded image as blob
         file_read = params[:user][:file_attachment][:file].read
         @user.file_attachment = FileAttachment.new(name: 'signature - ' + @user.username, file: file_read)
+
+        file = HTTParty.post("http://52.240.59.172:8000/api/v1/files/",
+          :body => {
+            file: File.open(params[:user][:file_attachment][:file].path),
+            name: @user.file_attachment.name
+          }
+        )
+        remote_user = HTTParty.get("http://52.240.59.172:8000/api/v1/users/#{@user.api_id}/")
+
+        remote_user_update_sign = HTTParty.put("http://52.240.59.172:8000/api/v1/users/#{@user.api_id}/",
+          :body => {
+            id: remote_user.parsed_response['id'],
+            full_name: remote_user.parsed_response['full_name'],
+            username: remote_user.parsed_response['username'],
+            email: remote_user.parsed_response['email'],
+            password: remote_user.parsed_response['password'],
+            signature: file.parsed_response['id']
+          }
+        )
         @user.save
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }

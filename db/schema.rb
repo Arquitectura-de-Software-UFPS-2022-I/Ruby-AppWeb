@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_10_011844) do
+ActiveRecord::Schema.define(version: 2022_03_10_030052) do
 
   create_table "file", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 30, null: false
-    t.binary "file", null: false
+    t.binary "file", limit: 4294967295, null: false
     t.timestamp "created_date", default: -> { "current_timestamp()" }, null: false
   end
 
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2022_03_10_011844) do
     t.string "name", limit: 50, null: false
     t.string "email", limit: 30, null: false
     t.string "username", limit: 10, null: false
-    t.string "password", limit: 250, null: false
     t.integer "signature_id"
     t.datetime "modified_date"
     t.timestamp "created_date", default: -> { "current_timestamp()" }, null: false

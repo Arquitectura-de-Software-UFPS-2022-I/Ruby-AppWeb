@@ -12,6 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
+    update_api_id
   end
 
   # GET /resource/edit
@@ -59,4 +60,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def update_api_id
+    remote_user = SignUpService.new(current_user.name, current_user.username, current_user.email, current_user.password).call
+    current_user.update(api_id: remote_user.parsed_response['id'])
+  end
 end
