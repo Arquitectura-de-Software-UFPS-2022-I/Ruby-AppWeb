@@ -1,0 +1,23 @@
+<%= form_with(url: request_request_sign_user_path) do |form| %>
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+	<div class="field">
+    <%= form.label :pos_x %>
+    <%= form.text_field :pos_x %>
+  </div>
+
+	<div class="field">
+    <%= form.label :pos_y %>
+    <%= form.text_field :pos_y %>
+  </div>
+
+	<div class="field">
+    <%= form.label :page %>
+    <%= form.text_field :page %>
+  </div>
+
+  <%= form.submit "Request sign"%>
+<% end %>
