@@ -24,6 +24,6 @@
 
 <%= link_to 'Upload document', new_file_attachment_path %> |
 <%= link_to 'My Documents / Request Signatures', request_index_path %> |
-<%= link_to 'Documents that require my signature', users_path %> |
+<%= link_to 'Documents that require my signature', sign_user_index_path %> |
 <%= link_to 'Edit / Upload Signature', edit_user_path(@user) %> |
 <%= link_to "Logout", destroy_user_session_path, :method => :delete %>

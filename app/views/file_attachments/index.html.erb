@@ -16,7 +16,6 @@
     <% @file_attachments.each do |file_attachment| %>
       <tr>
         <td><%= file_attachment.name %></td>
-        <td><%= file_attachment.file %></td>
         <td><%= file_attachment.created_date %></td>
         <td><%= link_to 'Show', file_attachment %></td>
         <td><%= link_to 'Edit', edit_file_attachment_path(file_attachment) %></td>
