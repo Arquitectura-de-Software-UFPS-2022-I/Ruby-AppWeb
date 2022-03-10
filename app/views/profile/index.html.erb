@@ -15,28 +15,16 @@
   <%= @user.username %>
 </p>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
 
 <p>
   <strong>Signature:</strong>
   <%= @user.signature_id %>
 </p>
 
-<p>
-  <strong>Modified date:</strong>
-  <%= @user.modified_date %>
-</p>
 
-<p>
-  <strong>Created date:</strong>
-  <%= @user.created_date %>
-</p>
-
-<%= link_to 'Upload document and sign it', new_file_attachment_path %> |
-<%= link_to 'My documents', users_path %>
-<br>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Upload document', new_file_attachment_path %> |
+<%= link_to 'Create new request', users_path %> |
+<%= link_to 'My requests', users_path %> |
+<%= link_to 'Requested to me', users_path %> |
+<%= link_to 'Edit / Upload Signature', edit_user_path(@user) %> |
+<%= link_to "Logout", destroy_user_session_path, :method => :delete %>

@@ -24,9 +24,25 @@ class FileAttachmentsController < ApplicationController
     @file_attachment = FileAttachment.new(file_attachment_params)
 
     respond_to do |format|
-      file_read = params[:file_attachment][:file].read
-      @file_attachment.file = file_read
       if @file_attachment.save
+        file_read = params[:file_attachment][:file].read
+        @file_attachment.file = file_read
+
+        file = HTTParty.post("http://52.240.59.172:8000/api/v1/files/",
+          :body => {
+            file: File.open(params[:file_attachment][:file].path),
+            name: params[:file_attachment][:name]
+          }
+        )
+
+        signature_request = HTTParty.post("http://52.240.59.172:8000/api/v1/signature_requests/",
+          :body => {
+            subject: params[:file_attachment][:subject],
+            document: file.parsed_response['id'],
+            user: current_user.api_id
+          }
+        )
+
         format.html { redirect_to file_attachment_url(@file_attachment), notice: "File attachment was successfully created." }
         format.json { render :show, status: :created, location: @file_attachment }
       else
