@@ -37,7 +37,7 @@ class FileAttachmentsController < ApplicationController
 
         CreateRequestService.new(params[:file_attachment][:subject], file.parsed_response['id'], current_user.api_id).call
 
-        format.html { redirect_to file_attachment_url(@file_attachment), notice: "File attachment was successfully created." }
+        format.html { redirect_to profile_index_path, notice: "File attachment was successfully created." }
         format.json { render :show, status: :created, location: @file_attachment }
       else
         format.html { render :new, status: :unprocessable_entity }
