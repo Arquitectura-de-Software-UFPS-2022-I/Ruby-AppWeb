@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :request do
     get 'request_sign', to: 'request#request_sign'
     post 'request_sign_user', to: 'request#request_sign_user'
+    get 'download_document', to: 'request#download_document'
   end
   resources :sign_user do
     post 'sign_user', to: 'sign_user#sign_user_document'
